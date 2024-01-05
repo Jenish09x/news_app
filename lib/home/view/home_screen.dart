@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 contryChip(name: "USA", contryCode: 'us'),
                 contryChip(name: "INDIA", contryCode: 'in'),
-                contryChip(name: "LONDON",contryCode: "uk"),
+                contryChip(name: "LONDON", contryCode: "uk"),
                 contryChip(name: "AUSTRALIA", contryCode: "au"),
               ],
             ),
