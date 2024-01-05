@@ -6,9 +6,9 @@ import '../news/model/news_model.dart';
 
 class APIHelper{
 
-  Future<HomeModel?> apiToModel(String contry)async {
+  Future<HomeModel?> apiToModel(String country)async {
 
-    String apiLink="https://newsapi.org/v2/top-headlines?country=$contry&category=business&apiKey=c3a54fe623fe49baa0d9a717a8acd9de";
+    String apiLink="https://newsapi.org/v2/top-headlines?country=$country&category=business&apiKey=c3a54fe623fe49baa0d9a717a8acd9de";
     var api=Uri.parse(apiLink);
     var response = await http.get(api);
     if(response.statusCode==200)
@@ -20,9 +20,9 @@ class APIHelper{
     return null;
   }
 
-  Future<NewsModel?> newsAPIToModel()
+  Future<NewsModel?> newsAPIToModel(String news)
   async {
-    String apiLink="https://newsapi.org/v2/everything?q=tesla&from=2023-12-05&sortBy=publishedAt&apiKey=c3a54fe623fe49baa0d9a717a8acd9de";
+    String apiLink="https://newsapi.org/v2/everything?q=$news&from=2023-12-05&sortBy=publishedAt&apiKey=c3a54fe623fe49baa0d9a717a8acd9de";
     var api=Uri.parse(apiLink);
     var response = await http.get(api);
     if(response.statusCode==200)
