@@ -28,23 +28,56 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: const Text("24 News"),
         ),
-        body: providerW!.homeModel == null
-            ? const Center(child: Text("whait......"))
-            : ListView.builder(
-                itemCount: providerW!.homeModel!.articlesList!.length,
-                itemBuilder: (context, index) => ListTile(
-                  leading: Image.network(providerW!
-                          .homeModel!.articlesList![index].urlToImage ??
-                      "https://resize.indiatvnews.com/en/centered/newbucket/1200_675/2020/08/breakingnews-live-blog-1568185450-1595123397-1597973758.jpg"),
-                  title: Text(
-                      "${providerW!.homeModel!.articlesList![index].title}"),
-                  subtitle: Text(
-                    "${providerW!.homeModel!.articlesList![index].content}",
-                    style: const TextStyle(fontSize: 10, color: Colors.grey),
-                  ),
+        body: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                contryChip(name: "USA", contryCode: 'us'),
+                contryChip(name: "INDIA", contryCode: 'in'),
+                contryChip(
+                  name: "PAKISTAN",
+                  contryCode: "pk",
                 ),
-              ),
+                contryChip(name: "AUSTRALIA", contryCode: "au"),
+              ],
+            ),
+            providerW!.homeModel == null
+                ? const Center(child: Text("wait......"))
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: providerW!.homeModel!.articlesList!.length,
+                      itemBuilder: (context, index) => ListTile(
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(providerW!
+                                  .homeModel!.articlesList![index].urlToImage ??
+                              "https://resize.indiatvnews.com/en/centered/newbucket/1200_675/2020/08/breakingnews-live-blog-1568185450-1595123397-1597973758.jpg"),
+                        ),
+                        title: Text(
+                            "${providerW!.homeModel!.articlesList![index].title}"),
+                        subtitle: Text(
+                          "${providerW!.homeModel!.articlesList![index].content}",
+                          style:
+                              const TextStyle(fontSize: 10, color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                  ),
+          ],
+        ),
       ),
     );
   }
+
+  ActionChip contryChip({required String name, required String contryCode}) =>
+      ActionChip(
+        label: Text(name),
+        backgroundColor:
+            providerR!.contry == contryCode ? Colors.blueAccent : Colors.white,
+        onPressed: () {
+          providerR!.CheckContry(contryCode);
+          providerR!.getData();
+        },
+      );
 }
